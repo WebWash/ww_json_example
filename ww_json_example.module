@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Example module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ww_json_example_menu() { 
+  $items['node/%node/json'] = array(
+    'page callback' => 'ww_json_example_endpoint',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
+  
+  $items['ww-json-example'] = array(
+    'title' => 'Web Wash JSON examples',
+    'page callback' => 'ww_json_example_example_page',
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+/**
+ * Menu callback for the node JSON endpoint.
+ *
+ * @param $node
+ *   A node object.
+ * 
+ * @return
+ *   Returns node as JSON.
+ */
+function ww_json_example_endpoint($node) {
+  drupal_json_output($node);
+}
+
+/**
+ * Menu callback for the example page.
+ */
+function ww_json_example_example_page() {
+  $output = '';
+  
+  $output .= t('Demonstration code for the !article article. For educational purposes only.', array('!article' => l('Getting Started with JSON in Drupal','http://webwash.net/articles/getting-started-json-drupal')));
+  
+  // Encoding JSON.
+  $output .= '<h2>Encoding JSON</h2>';
+  
+  // Example encoding.
+  $encode_array = array('Boat', 'Car', 'Ship', 'Building');
+  $encode_output = drupal_json_encode($encode_array);
+  
+  $output .= "From:<pre>" . print_r($encode_array, TRUE) . "</pre>";
+  $output .= 'To:<pre>' . $encode_output . '</pre>';
+  
+  // Example decoding.
+  $decode_output = $encode_output;
+  $decode_array = drupal_json_decode($decode_output);
+  
+  $output .= '<h2>Decoding JSON</h2>';
+  $output .= 'From:<pre>' . $decode_output . '</pre>';
+  $output .= 'To:<pre>' . print_r($decode_array, TRUE) . '</pre>';
+  
+  // Pulling in Twitter JSON object.
+  $output .= '<h2>Pulling in JSON objects</h2>';
+  $request = drupal_http_request('https://api.twitter.com/1/users/show.json?screen_name=TwitterAPI&include_entities=true');
+  
+  $twitter_json = drupal_json_decode($request->data);
+  
+  $output .= 'From:<pre>' . $request->data . '</pre>';
+  $output .= 'To:<pre>' . print_r($twitter_json, TRUE) . '</pre>';
+  
+  return $output;
+}
