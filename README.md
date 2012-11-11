@@ -1,4 +1,4 @@
-Demonstration code for the [Getting Started with JSON in Drupal](http://webwash.net/articles/getting-started-json-drupal) article. For educational purposes only.
+Demonstration code for the [Getting Started with JSON in Drupal](http://webwash.net/articles/getting-started-json-drupal-7) article. For educational purposes only.
 
 Installation
 -------------------------

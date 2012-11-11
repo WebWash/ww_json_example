@@ -43,7 +43,7 @@ function ww_json_example_endpoint($node) {
 function ww_json_example_example_page() {
   $output = '';
   
-  $output .= t('Demonstration code for the !article article. For educational purposes only.', array('!article' => l('Getting Started with JSON in Drupal','http://webwash.net/articles/getting-started-json-drupal')));
+  $output .= t('Demonstration code for the !article article. For educational purposes only.', array('!article' => l('Getting Started with JSON in Drupal','http://webwash.net/articles/getting-started-json-drupal-7')));
   
   // Encoding JSON.
   $output .= '<h2>Encoding JSON</h2>';
